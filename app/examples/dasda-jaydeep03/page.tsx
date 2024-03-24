@@ -1,3 +1,4 @@
+
 import { getTokenUrl } from "frames.js";
 import {
     FrameButton,
@@ -28,18 +29,20 @@ export default async function Home({ searchParams }: NextServerPageProps) {
     return (
         <div>
             Mint button example <Link href={createDebugUrl(url)}>Debug</Link>
-            {id % 2 == 0 && <meta name="fc:frame:video" content="${video}" />}
+            {id % 2 == 0 && <meta name="fc:frame:video" content="https://lvpr.tv?v=dasdsa" />}
             <FrameContainer
                 pathname="/examples/mint-button"
                 postUrl="/examples/mint-button/frames"
-                // state={state}
-                // previousFrame={previousFrame}
+            // state={state}
+            // previousFrame={previousFrame}
             >
                 {(id === undefined || id % 2 != 0) && <FrameImage
-                    src="${fallbackimage}"
+                    src="https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg"
                     aspectRatio="1:1"
                 ></FrameImage>}
-                ${dynamicButtons}
+                <FrameButton action="post" target="https://no-code-frames.vercel.app/examples/dasda-jaydeep03">hello test</FrameButton>
+
             </FrameContainer>
         </div>
     );
+  }
