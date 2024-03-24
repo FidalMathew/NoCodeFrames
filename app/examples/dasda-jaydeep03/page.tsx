@@ -40,7 +40,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
                     src="https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg"
                     aspectRatio="1:1"
                 ></FrameImage>}
-                <FrameButton action="post" target="https://no-code-frames.vercel.app/examples/dasda-jaydeep03">hello test</FrameButton>
+                <FrameButton action="post" target="https://no-code-frames.vercel.app/examples/dasda-jaydeep03?id=${nextId}">hello test</FrameButton>
 
             </FrameContainer>
         </div>
