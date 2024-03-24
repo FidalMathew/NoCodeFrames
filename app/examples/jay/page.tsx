@@ -69,13 +69,13 @@ export default async function Home({ searchParams }: NextServerPageProps) {
   return (
     <div>
       Mint button example <Link href={createDebugUrl(url)}>Debug</Link>
+      <meta name="fc:frame:video" content={nfts[state.pageIndex]!.src} />
       <FrameContainer
         pathname="/examples/mint-button"
         postUrl="/examples/mint-button/frames"
         state={state}
         previousFrame={previousFrame}
       >
-        <meta name="fc:frame:video" content={nfts[state.pageIndex]!.src} />
         <FrameImage
           src={nfts[state.pageIndex]!.src}
           aspectRatio="1:1"
