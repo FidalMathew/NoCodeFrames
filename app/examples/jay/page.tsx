@@ -75,6 +75,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
         state={state}
         previousFrame={previousFrame}
       >
+        <meta name="fc:frame:video" content={nfts[state.pageIndex]!.src} />
         <FrameImage
           src={nfts[state.pageIndex]!.src}
           aspectRatio="1:1"
