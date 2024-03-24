@@ -71,7 +71,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
       Mint button example <Link href={createDebugUrl(url)}>Debug</Link>
       <meta name="fc:frame:video" content="https://lvpr.tv?v=dasdsa" />
       <FrameContainer
-        pathname="/examples/{}"
+        pathname="/examples/mint-button"
         postUrl="/examples/mint-button/frames"
         state={state}
         previousFrame={previousFrame}
