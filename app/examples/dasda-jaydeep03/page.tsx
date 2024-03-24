@@ -77,11 +77,13 @@ export default async function Home({ searchParams }: NextServerPageProps) {
         previousFrame={previousFrame}
       >
         <FrameImage
+          src="https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg"
+          aspectRatio="1:1"
+        ></FrameImage>
+        <FrameImage
           src={nfts[state.pageIndex]!.src}
           aspectRatio="1:1"
         ></FrameImage>
-        <FrameButton>←</FrameButton>
-        <FrameButton>→</FrameButton>
         <FrameButton>hello test</FrameButton>
 
       </FrameContainer>
