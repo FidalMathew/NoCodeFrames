@@ -1,65 +1,61 @@
-
-import { getTokenUrl } from "frames.js";
 import {
-    FrameButton,
-    FrameContainer,
-    FrameImage,
-    FrameReducer,
-    NextServerPageProps,
-    getPreviousFrame,
-    useFramesReducer,
+  FrameButton,
+  FrameContainer,
+  FrameImage,
+  FrameReducer,
+  NextServerPageProps,
+  getPreviousFrame,
+  useFramesReducer,
 } from "frames.js/next/server";
 import Link from "next/link";
-// import { zora } from "viem/chains";
-// import { currentURL } from "../../utils";
+import { currentURL } from "../../utils";
 import { createDebugUrl } from "../../debug";
 
-// Define the interface for searchParams
-interface SearchParams {
-    get(param: string): string | null;
-    // Add other methods/properties if necessary
-}
+type State = {
+  pageIndex: number;
+};
 
-// Define the interface for NextServerPageProps including searchParams
-interface NextServerPagePropsWithSearchParams {
-    searchParams?: SearchParams;
-    // Add other props if necessary
-}
+const totalPages = 5;
+const initialState: State = { pageIndex: 0 };
 
-// Define the type for PageProps
-type PageProps = {
-    searchParams?: SearchParams;
-    // Add other props if necessary
+const reducer: FrameReducer<State> = (state, action) => {
+  const buttonIndex = action.postBody?.untrustedData.buttonIndex;
+
+  return {
+    pageIndex: buttonIndex
+      ? (state.pageIndex + (buttonIndex === 2 ? 1 : -1)) % totalPages
+      : state.pageIndex,
+  };
 };
 
 // This is a react server component only
-export default async function Home({ searchParams }: NextServerPagePropsWithSearchParams = {}) {
-    const id = searchParams?.get('id') ?? '';
+export default async function Home({ searchParams }: NextServerPageProps) {
+  const url = currentURL("/examples/multi-page");
+  const previousFrame = getPreviousFrame<State>(searchParams);
+  const [state] = useFramesReducer<State>(reducer, initialState, previousFrame);
+  const imageUrl = `https://picsum.photos/seed/frames.js-${state.pageIndex}/1146/600`;
 
-    const idAsNumber = id ? Number(id) : 1;
-
-    const nextId = idAsNumber + 1;
-
-
-
-    // then, when done, return next frame
-    return (
-        <div>
-            Mint button example <Link href={createDebugUrl(url)}>Debug</Link>
-            {id % 2 == 0 && <meta name="fc:frame:video" content="https://lvpr.tv?v=dasdsa" />}
-            <FrameContainer
-                pathname="/examples/mint-button"
-                postUrl="/examples/mint-button/frames"
-            // state={state}
-            // previousFrame={previousFrame}
-            >
-                {(id === undefined || id % 2 != 0) && <FrameImage
-                    src="https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg"
-                    aspectRatio="1:1"
-                ></FrameImage>}
-                <FrameButton action="post" target="https://no-code-frames.vercel.app/examples/dasda-jaydeep03?id=${nextId}">hello test</FrameButton>
-
-            </FrameContainer>
-        </div>
-    );
-  }
+  // then, when done, return next frame
+  return (
+    <div>
+      Multi-page example <Link href={createDebugUrl(url)}>Debug</Link>
+      <FrameContainer
+        pathname="/examples/multi-page"
+        postUrl="/examples/multi-page/frames"
+        state={state}
+        previousFrame={previousFrame}
+      >
+        <FrameImage>
+          <div tw="flex flex-col">
+            <img width={573} height={300} src={imageUrl} alt="Image" />
+            <div tw="flex">
+              This is slide {state.pageIndex + 1} / {totalPages}
+            </div>
+          </div>
+        </FrameImage>
+        <FrameButton>←</FrameButton>
+        <FrameButton>→</FrameButton>
+      </FrameContainer>
+    </div>
+  );
+}
