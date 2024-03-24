@@ -80,7 +80,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
           src="C:\fakepath\canvas.png"
           aspectRatio="1:1"
         ></FrameImage>
-        <FrameButton action="post">hello test</FrameButton>
+        <FrameButton action="post" target="https://www.google.com/">hello test</FrameButton>
 
       </FrameContainer>
     </div>
