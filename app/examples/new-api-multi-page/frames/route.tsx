@@ -1,10 +1,12 @@
+
+
 /* eslint-disable react/jsx-key */
 import { createFrames, Button } from "frames.js/next";
-import Image from "next/image";
+
 const totalPages = 5;
 
 const frames = createFrames({
-  basePath: "/new-api-multi-page/frames",
+  basePath: "/examples/new-api/frames",
 });
 
 const handleRequest = frames(async (ctx) => {
@@ -26,14 +28,16 @@ const handleRequest = frames(async (ctx) => {
         action="post"
         target={{
           query: { pageIndex: (pageIndex - 1) % totalPages },
-        }}>
+        }}
+      >
         ←
       </Button>,
       <Button
         action="post"
         target={{
           query: { pageIndex: (pageIndex + 1) % totalPages },
-        }}>
+        }}
+      >
         →
       </Button>,
     ],
@@ -43,3 +47,4 @@ const handleRequest = frames(async (ctx) => {
 
 export const GET = handleRequest;
 export const POST = handleRequest;
+
