@@ -14,7 +14,7 @@ import Link from "next/link";
 // import { currentURL } from "../../utils";
 import { createDebugUrl } from "../../debug";
 
-
+// Define the interface for searchParams
 interface SearchParams {
     get(param: string): string | null;
     // Add other methods/properties if necessary
@@ -22,17 +22,23 @@ interface SearchParams {
 
 // Define the interface for NextServerPageProps including searchParams
 interface NextServerPagePropsWithSearchParams {
-    searchParams: SearchParams;
+    searchParams?: SearchParams;
     // Add other props if necessary
 }
 
+// Define the type for PageProps
+type PageProps = {
+    searchParams?: SearchParams;
+    // Add other props if necessary
+};
+
 // This is a react server component only
-export default async function Home({ searchParams }: NextServerPagePropsWithSearchParams = { searchParams: { get: () => null } }) {
-    const id = searchParams.get('id')
+export default async function Home({ searchParams }: NextServerPagePropsWithSearchParams = {}) {
+    const id = searchParams?.get('id') ?? '';
 
-    const idAsNumber = id ? Number(id) : 1
+    const idAsNumber = id ? Number(id) : 1;
 
-    const nextId = idAsNumber + 1
+    const nextId = idAsNumber + 1;
 
 
 
