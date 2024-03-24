@@ -19,6 +19,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+
+
+
 export default async function Home() {
   const url = currentURL("/new-api-multi-page");
 
