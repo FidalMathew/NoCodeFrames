@@ -69,7 +69,7 @@ export default async function Home({ searchParams }: NextServerPageProps) {
   return (
     <div>
       Mint button example <Link href={createDebugUrl(url)}>Debug</Link>
-      <meta name="fc:frame:video" content= />
+      <meta name="fc:frame:video" content="https://lvpr.tv?v=dasdsa" />
       <FrameContainer
         pathname="/examples/{}"
         postUrl="/examples/mint-button/frames"
@@ -77,10 +77,10 @@ export default async function Home({ searchParams }: NextServerPageProps) {
         previousFrame={previousFrame}
       >
         <FrameImage
-          src=C:\fakepath\canvas.png
+          src="C:\fakepath\canvas.png"
           aspectRatio="1:1"
         ></FrameImage>
-        <FrameButton action=>dsa</FrameButton>
+        <FrameButton action="dsds">dsa</FrameButton>
 
       </FrameContainer>
     </div>
